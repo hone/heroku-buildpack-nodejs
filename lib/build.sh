@@ -276,7 +276,7 @@ restore_cache() {
         fi
       fi
     done
-  elif [ "$cache_status" == "valid"]; then
+  elif [ "$cache_status" == "valid" ]; then
     restore_npm_cache
     info "$cache_status"
   else
@@ -294,8 +294,8 @@ restore_npm_cache() {
 cache_directories() {
   local package_json="$build_dir/package.json"
   local key=".cache_directories"
-  check=(key_exist $package_json $key)
-  result=-1
+  local check=$(key_exist $package_json $key)
+  local result=-1
   if [ "$check" != -1 ]; then
     result=$(read_json "$package_json" "$key[]")
   fi
@@ -305,7 +305,7 @@ cache_directories() {
 key_exist() {
   local file=$1
   local key=$2
-  output=$(read_json $file $key)
+  local output=$(read_json $file $key)
   if [ -n "$output" ]; then
     echo 1
   else
